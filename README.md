@@ -10,4 +10,4 @@ To ensure all dependencies are resolved, run the following command:
 
 To run the tests use the command: `py -m pytest -q`
 
-Additional arguments may be provided my using the `--persons(num)` flag; which will generate `num` number of persons to test. If not provided, will result in a default value of 5.
+Additional arguments may be provided my using the `--persons num` flag; which will generate `num` number of persons to test. If not provided, will result in a default value of 5.
