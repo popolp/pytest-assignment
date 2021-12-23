@@ -10,7 +10,7 @@ params = [
 """
 Verify status code -> verify person data
 """
-def test_compute(person):
+def test_persons(person):
     expected_name = person.name
     with ThreadPoolExecutor(max_workers = 3) as executor:
         results = [executor.submit(call_person_api, param, expected_name) for param in params]
