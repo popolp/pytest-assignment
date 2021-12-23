@@ -1,2 +1,2 @@
-pip install pytest
-pip install names
+requests==2.26.0
+names==0.3.0

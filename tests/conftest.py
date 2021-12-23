@@ -1,33 +1,22 @@
-import pytest
-from classes.obj_generator import person_generator
-
+from obj_generator import person_generator
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--amount",
+        "--persons",
         type=int,
         action="store",
         metavar="num",
-        help="generates 'amount' number of persons to test",
+        help="generates 'persons' number of persons to test",
     )
 
-
-# def pytest_configure(config):
-#     # register the "lvl" marker
-#     config.addinivalue_line(
-#         "markers", "amount(num): mark test to run only on named environment"
-#     )
-
-
 def pytest_generate_tests(metafunc):
-    if "persons_list" in metafunc.fixturenames:
-        if metafunc.config.getoption("amount"):
-            amount = metafunc.config.getoption("amount")
+    if "person" in metafunc.fixturenames:
+        if metafunc.config.getoption("persons"):
+            num_of_persons = metafunc.config.getoption("persons")
         else:
-            amount = 5
-        # GENERATE PERSON LIST HERE
-        gen = person_generator()
-        gen.generate_x(amount)
-        persons_list = gen.generate_x(amount)
-        metafunc.parametrize("persons_list", persons_list)
+            num_of_persons = 5
+            
+        generator = person_generator()
+        persons_list = generator.generate_persons(num_of_persons)
+        metafunc.parametrize("person", persons_list)
 
