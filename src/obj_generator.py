@@ -15,14 +15,15 @@ class person_generator:
     
     def generate_persons(self, num_of_objects = 5):
         return [
-            self.populate_person_data(self.generated_type(name = names.get_first_name())) for _ in range(num_of_objects)
+            self.populate_person_data() for _ in range(num_of_objects)
             ]
 
     """
     Grabs data for each person from the APIs.
     Nationality is selected to be the highest probability option.
     """
-    def populate_person_data(self, person): 
+    def populate_person_data(self): 
+        person = self.generated_type(name = names.get_first_name())
         with ThreadPoolExecutor(max_workers=3) as executor:
             person.age = executor.submit(lambda: call_person_api("agify", person.name).json()["age"])
             person.gender = executor.submit(lambda: call_person_api("genderize", person.name).json()["gender"])
