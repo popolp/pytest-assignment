@@ -1,5 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
-from api import call_api
+from person_api import call_person_api
 
 params = [
     "agify",
@@ -13,7 +13,7 @@ Verify status code -> verify person data
 def test_compute(person):
     expected_name = person.name
     with ThreadPoolExecutor(max_workers = 3) as executor:
-        results = [executor.submit(call_api, param, expected_name) for param in params]
+        results = [executor.submit(call_person_api, param, expected_name) for param in params]
     
     # Check status codes before accessing data
     for result in results:

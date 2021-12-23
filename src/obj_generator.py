@@ -1,7 +1,7 @@
 import names
 from concurrent.futures import ThreadPoolExecutor
 from person import Person
-from api import call_api
+from person_api import call_person_api
 
 """
     The class is an object generator, intended to be generalized but currently supports only Person objects. 
@@ -24,7 +24,7 @@ class person_generator:
     """
     def populate_person_data(self, person): 
         with ThreadPoolExecutor(max_workers=3) as executor:
-            person.age = executor.submit(lambda: call_api("agify", person.name).json()["age"])
-            person.gender = executor.submit(lambda: call_api("genderize", person.name).json()["gender"])
-            person.nationality = executor.submit(lambda: call_api("nationalize", person.name).json()["country"][0]["country_id"])
+            person.age = executor.submit(lambda: call_person_api("agify", person.name).json()["age"])
+            person.gender = executor.submit(lambda: call_person_api("genderize", person.name).json()["gender"])
+            person.nationality = executor.submit(lambda: call_person_api("nationalize", person.name).json()["country"][0]["country_id"])
         return person
