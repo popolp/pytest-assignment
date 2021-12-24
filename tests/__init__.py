@@ -1,3 +1,6 @@
 import sys
-# adding classes to the system path
-sys.path.insert(0, 'C:/Users/omerp/Documents/pytest-assignment/src')
+import os
+import pytest
+print(pytest.__version__)
+current_directory = os.getcwd()
+sys.path.insert(0, current_directory+'/src')
