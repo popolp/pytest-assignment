@@ -23,4 +23,6 @@ def test_persons(person):
     expected_gender = results[1].result().json()["gender"]
     expected_nationality = results[2].result().json()["country"][0]["country_id"]
 
-    assert person.age.result() == expected_age and person.gender.result() == expected_gender and person.nationality.result() == expected_nationality
+    assert person.age.result() == expected_age 
+    assert person.gender.result() == expected_gender
+    assert person.nationality.result() == expected_nationality
