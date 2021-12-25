@@ -39,19 +39,25 @@ def pytest_assertrepr_compare(op, left, right):
             f"   vals: {left} != {right}",
         ]
 
-    # Nationality & Gender case
-    elif isinstance(left, str) and isinstance(right, str) and op == "==":
+    # Gender case
+    elif op == "==" and (left == "male" or left == "female"):
         return [
-            "Exception when comparing person gender or nationality instances:",
+            "Exception when comparing person gender instances:",
             f"   vals: {left} != {right}",
         ]
-
+    
+    # Nationality Case
+    elif isinstance(left, str) and isinstance(right, str) and op == "==":
+        return [
+            "Exception when comparing person nationality instances:",
+            f"   vals: {left} != {right}",
+        ]
+        
+        
     """
     Generates test cases.
     Will use "persons" arg if provided in the command line, otherwise will default to 5 tests.
     """
-
-
 def pytest_generate_tests(metafunc):
     if "person" in metafunc.fixturenames:
         if metafunc.config.getoption("persons"):
